@@ -15,14 +15,17 @@ def unix_countup(party=1500000000, moment=0.01, offset=0):
     Example:
     unix_countup(party=1500000000, moment=0.01, offset=0)
     '''
-    now = round((datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset, 2)
+    now = round((datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset, 0)
     while now < party:
-        print("{:,}".format(now)),'\r',
+        exact_now = (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset
+        print("{:,}".format(exact_now)),'\n',
         sys.stdout.flush()
-        time.sleep(moment)
-        now = round((datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset, 2)
-
-
+        #time.sleep(moment)
+        old_now = now
+        new_now = round((datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset, 0)
+        while old_now == new_now:
+            new_now = round((datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds() + offset, 0)
+        now = new_now
 
 
 
