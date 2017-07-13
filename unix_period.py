@@ -1,7 +1,8 @@
 import time
+import math
 
 #Press CTRL C to interrupt the unix_countup function:
-def unix_countup(party=1500000000, *msg):
+def unix_countup(offset=0.0):
     '''Unix Time Stamp Counter.
     
     unix_countup(party)
@@ -11,25 +12,10 @@ def unix_countup(party=1500000000, *msg):
     unix_countup(party=1600000000)
     '''
     
-    if msg:
-        while True:
-            if time.time()<party:
-                print("{:,}".format(time.time()))
-                wait_time = 1-time.time()%1
-                time.sleep(wait_time if wait_time else 1)
-            else:
-                print(str(msg[0]))
-                wait_time = 1-time.time()%1
-                time.sleep(wait_time if wait_time else 1)
-    
-    else:
-        while True:
-            if time.time()<party:
-                print("{:,}".format(time.time()))
-                wait_time = 1-time.time()%1
-                time.sleep(wait_time if wait_time else 1)
-            else:
-                break
+    while True:
+        print("{:,.0f}".format(math.ceil(time.time() - 0.1)))
+        wait_time = 1-(time.time()+offset)%1
+        time.sleep(wait_time if wait_time else 1)
 
 
 

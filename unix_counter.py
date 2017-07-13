@@ -45,22 +45,24 @@ https://www.Twitter.com/VossDataScience
 #NOTE (fix): dashes make the argument optional, not required
 
 
+import sys
 
-
+counter = up.unix_countup(float(sys.argv[1]))
+counter
 
 while True:
     try:
         counter = up.unix_countup(int(sys.argv[1]), sys.argv[2])
         counter
     except:
-        parser.add_argument('-p', '--party', nargs='*', type=int, default=1500000000, help='The unix time for the party!  Default:[party=1500000000]')
+        parser.add_argument('-p', '--party', nargs='*', type=float, default=0.0, help='The unix time for the party!  Default:[party=0.0]')
         parser.add_argument('-m', '--message', nargs='*', type=str, help='The message displayed when the counter reaches given time.')
         #parser.add_argument('-o','--offset', nargs='*', type=float, default=0, help='The place out of line from the actual time.  Default:[offset=0]')
         args=parser.parse_args()
         
-        if args.party and args.message:
+        if args.party:
 		    #  !! ARGS.MESSAGE  NOT WORKING  !!
-            counter = up.unix_countup(args.party, args.message)
+            counter = up.unix_countup(args.party)
             counter
         else:
             if __name__ == '__main__':
