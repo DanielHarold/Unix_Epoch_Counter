@@ -1,3 +1,4 @@
+import sys
 import time
 import math
 
@@ -14,6 +15,7 @@ def unix_countup(offset=0.0):
     
     while True:
         print("{:,.0f}".format(math.ceil(time.time() - 0.1)))
+        sys.stdout.flush()
         wait_time = 1-(time.time()+offset)%1
         time.sleep(wait_time if wait_time else 1)
 
